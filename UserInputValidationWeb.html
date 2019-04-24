@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style type="text/css">
+  span{color:#b00;}
+</style>
+<script>
+function validateForm() {
+
+  document.getElementById("nameuyari").innerHTML="";
+  document.getElementById("mailuyari").innerHTML="";
+  document.getElementById("sayisaluyari").innerHTML="";
+  document.getElementById("basamakliuyari").innerHTML="";
+  document.getElementById("alfafuyari").innerHTML="";
+  document.getElementById("max30uyari").innerHTML="";
+  document.getElementById("uckelimeuyari").innerHTML="";
+  document.getElementById("passworduyari").innerHTML="";
+
+  var maildesen, mail;
+  mail=document.getElementById("email").value;
+  maildesen=/.+@.+\.+./;
+  var basamaklisayi=document.getElementById("basamakli").value;
+  var letters = /^[a-zA-Z]+$/;
+  var uckelimelik=document.getElementById("uckelime").value;
+  var uckelimedizi=uckelimelik.split(' ');
+  var pass = document.getElementById("password").value;
+  var passregex=/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!?/.,:;'"&()])(?=.{8,})/;
+  var x = document.getElementById("name").value;
+  if (x=="") {
+    document.getElementById("nameuyari").innerHTML="isim alanı boş bırakılamaz !";}
+  if (mail==""){
+    document.getElementById("mailuyari").innerHTML="mailinizi giriniz !";}
+    else if (!maildesen.test(mail)) {
+      document.getElementById("mailuyari").innerHTML="mailinizi kurallara uygun olarak giriniz !";}
+
+  if (document.getElementById("sayisal").value=="") {
+    document.getElementById("sayisaluyari").innerHTML="bu alan boş bırakılamaz !";}
+    else if (isNaN(document.getElementById("sayisal").value)){document.getElementById("sayisaluyari").innerHTML="sayısal bir değer girmek zorundasınız !";}
+
+  if (basamaklisayi=="") {
+    document.getElementById("basamakliuyari").innerHTML="bir değer girmek zorundasınız !";}
+    else if (isNaN(basamaklisayi)){document.getElementById("basamakliuyari").innerHTML="sayısal bir değer girmek zorundasınız !";}
+    else if (basamaklisayi.toString().length!==12) {document.getElementById("basamakliuyari").innerHTML="12 basamaklı olmalı !";}
+
+  if (document.getElementById("alfa").value==""){
+    document.getElementById("alfafuyari").innerHTML="bu alan boş bırakılamaz !";}
+    else if (!document.getElementById("alfa").value.match(letters)) {document.getElementById("alfafuyari").innerHTML="sadece alfabetik karakter !";}
+
+  if (document.getElementById("max30").value==""){
+    document.getElementById("max30uyari").innerHTML="Sadece harf ve en fazla 30 uzunlukta olan string giriniz !";}
+    else if (!document.getElementById("max30").value.match(letters)) {document.getElementById("max30uyari").innerHTML="sadece alfabetik karakter !";}
+
+  if (uckelimelik==""){
+    document.getElementById("uckelimeuyari").innerHTML="3 kelimeden oluşan string girmelisiniz !";}
+    else if (uckelimedizi.length!==3) {document.getElementById("uckelimeuyari").innerHTML="3 kelime girmek zorundasın !";}
+
+  if (pass==""){
+    document.getElementById("passworduyari").innerHTML="şifre alanı boş bırakılamaz !";}
+    else if (!passregex.test(pass)) {document.getElementById("passworduyari").innerHTML="şifrenizi kurallara uygun olarak giriniz !";}
+  return false;
+}
+</script>
+</head>
+<body>
+
+<form name="myForm" action="/action_page.php" onsubmit="return validateForm()" method="post">
+  Aşağıdaki hiçbir input boş olmamalı: <br>
+  
+
+  <table style="width:70%">
+  <tr>
+    <td width="600">Boş olmamalı: </td>
+    <td><input type="text" id="name"></td>
+    <td width="600"><span id="nameuyari"></span></td>
+    
+  </tr>
+  <tr>
+    <td width="600">E-mail (Kurallara uygun email): </td>
+    <td><input type="text" id="email"></td>
+    <td width="600"><span id="mailuyari"></span></td>
+    
+  </tr>
+  <tr>
+    <td width="600">Sadece sayısal: </td>
+    <td><input type="text" id="sayisal"></td>
+    <td width="600"><span id="sayisaluyari"></span></td>
+  </tr>
+  <tr>
+    <td width="600">Sadece sayısal olan ve 12 basamak uzunluğundaki sayi: </td>
+    <td><input type="text" id="basamakli" maxlength="12"></td>
+    <td width="600"><span id="basamakliuyari"></span></td>
+  </tr>
+  <tr>
+    <td width="600">Sadece harf (a..z veya A..Z): </td>
+    <td><input type="text" id="alfa"></td>
+    <td width="600"><span id="alfafuyari"></span></td>
+  </tr>
+  <tr>
+    <td width="600">Sadece harf ve en fazla 30 uzunlukta olan string: </td>
+    <td><input type="text" id="max30" maxlength="30"></td>
+    <td width="600"><span id="max30uyari"></span></td>
+  </tr>
+  <tr>
+    <td width="600">3 kelimeden oluşan string: </td>
+    <td><input type="text" id="uckelime"></td>
+    <td width="600"><span id="uckelimeuyari"></span></td>
+  </tr>
+  <tr>
+    <td width="600">En az 1 büyük harf, en az 1 küçük harf, en az bir rakam ve en az 1 noktalama işareti içeren ve en az 8 uzunluğunda olan metin: </td>
+    <td><input type="text" id="password"></td>
+    <td width="600"><span id="passworduyari"></span></td>
+  </tr>
+  
+
+</table>
+
+<br>
+  <input type="submit" value="Submit">
+</form>
+
+</body>
+</html>
